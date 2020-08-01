@@ -1,0 +1,93 @@
+﻿@model LicenseProject.ViewModels.ProjectGrantAppViewModel
+
+<html>
+<head>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <form asp-action="StatusGrantApplication" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="content-wrapper">
+                <div style="background-color:white">
+                    <div class="align-content-lg-stretch">
+                        <div class="card-header">
+                            <h1 class="card-title lead">
+                                Cererea de finantare a fost trimisa
+                            </h1>
+                        </div>
+                        <div class="card-body" style="height:750px">
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                    <div class="callout callout-info">
+                                        <p>
+                                            <div style="height:30px">
+                                                Cererea  de finantare a companiei <strong> @Model.Entity</strong>, cu reprezentatul legal <strong> @Model.Representative</strong>,prin care se doreste finantarea cu suma de <strong> @Model.AmountOfFunding @Model.Currency</strong>
+
+                                            </div>
+                                            a proiectului <strong>@Model.ProjectName</strong> a fost trimisa catre un administrator pentru a fi analizata.
+
+                                        </p>
+
+                                        <p>
+                                            In acest moment cererea de finantare cu ID <strong>@Model.GrantApplicationID</strong>  se afla momentan: <strong>@Model.Status</strong>.
+                                        </p>
+                                        <div class="form-group col-md-3">
+                                            <label asp-for="GrantApplicationID" class="control-label">Cerere de finantare</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend ">
+                                                    <dl class="input-group-text"><dt>ID</dt></dl>
+                                                </div>
+                                                <input asp-for="GrantApplicationID" class="form-control" disabled />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text text-success font-weight-bold">✓</span>
+                                                </div>
+                                                <span asp-validation-for="GrantApplicationID" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label asp-for="Status" class="control-label">Status</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend ">
+                                                    <dl class="input-group-text"><dt>Status</dt></dl>
+                                                </div>
+                                                <input asp-for="Status" class="form-control" disabled />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text text-success font-weight-bold">✓</span>
+                                                </div>
+                                                <span asp-validation-for="Status" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <h6>Cererea de finantare urmeaza sa fie analizata, te rugam sa revii mai tarziu. </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Theme/dist/js/adminlte.min.js"></script>
+
+
+</body>
+</html>

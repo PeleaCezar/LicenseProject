@@ -1,0 +1,125 @@
+﻿@model LicenseProject.ViewModels.ProjectGrantAppViewModel
+
+<html>
+<head>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <form asp-action="AddGrantApplication">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="content-wrapper">
+                <div style="background-color:white">
+                    <div class="align-content-lg-stretch">
+                        <div class="card-header">
+                            <h1 class="card-title lead">
+                                Finantare proiect
+                            </h1>
+                        </div>
+                        <div class="card-body" style="height:750px">
+
+                            <h6>
+                                Salut,<strong> @Model.Representative</strong>! Ne bucuram ca doresti sa finantezi proiectul <strong>@Model.ProjectName</strong> .
+                            </h6>
+
+                            <h6>Te rugam sa completezi detaliile de mai jos pentru a putea finaliza procesul de finantare.</h6>
+                            <br />
+                            <br />
+
+
+                            <section class="content">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card card-light card-gray">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Cerere de finantare</h3>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label asp-for="Entity" class="control-label">Companie</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                        </div>
+                                                        <input asp-for="Entity" class="form-control" placeholder="Numele Companiei" />
+                                                    </div>
+                                                    <span asp-validation-for="Entity" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Representative" class="control-label">Reprezentant</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                        </div>
+                                                        <input asp-for="Representative" class="form-control" placeholder="Suma de finantare">
+                                                    </div>
+                                                    <span asp-validation-for="Representative" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="AmountOfFunding" class="control-label">Suma de finantare</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                        </div>
+                                                        <input asp-for="AmountOfFunding" class="form-control" placeholder="Suma de finantare">
+                                                    </div>
+                                                    <span asp-validation-for="AmountOfFunding" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label asp-for="Currency">Tipul monedei</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                        </div>
+                                                        <input class="form-control" asp-for="Currency" value="RON" disabled>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a asp-action="Index" asp-controller="Projects" class="btn btn-secondary">Inapoi la proiecte</a>
+                                        <input type="submit" value="Trimite cerere de finantare" class="btn btn-success float-right">
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Theme/dist/js/adminlte.min.js"></script>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+
+</body>
+</html>

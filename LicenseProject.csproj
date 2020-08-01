@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-LicenseProject-4F96BAA3-0728-49D4-A222-C1371B90F4EE</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200327150242_AddingBudget.cs" />
+    <Compile Remove="Data\Migrations\20200327150242_AddingBudget.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200411204943_Testing.cs" />
+    <Compile Remove="Data\Migrations\20200411204943_Testing.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200424191520_Verify.cs" />
+    <Compile Remove="Data\Migrations\20200424191520_Verify.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200424191808_Verify.cs" />
+    <Compile Remove="Data\Migrations\20200424191808_Verify.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200425135411_UserTask.cs" />
+    <Compile Remove="Data\Migrations\20200425135411_UserTask.Designer.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.3.107.3" />
+    <PackageReference Include="MailKit" Version="2.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.8.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="NToastNotify" Version="6.1.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\DateTimePicker\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\logo\" />
+  </ItemGroup>
+
+</Project>

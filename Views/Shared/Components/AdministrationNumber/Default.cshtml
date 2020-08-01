@@ -1,0 +1,29 @@
+﻿@model LicenseProject.ViewModels.AdministrationNumberViewModel
+@if (Model.NoOfUsers != 0)
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link" href="/Administration/PermissionEmployee">
+            <i class="fas fa-user-tie"></i>
+            <span class="badge badge-warning navbar-badge">@Model.NoOfUsers</span>
+        </a>
+    </li>
+}
+else
+{
+    <a class="nav-link" >
+        <i class="fas fa-user-tie"></i>
+        <span class="badge badge-warning navbar-badge"></span>
+    </a>
+}
+
+
+
+
+<!-- jQuery -->
+<script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
+

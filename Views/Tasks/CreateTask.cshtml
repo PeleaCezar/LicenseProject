@@ -1,0 +1,126 @@
+﻿@model LicenseProject.ViewModels.UserTaskViewModel
+
+    <html>
+    <head>
+
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">3
+        <!-- Select2 -->
+        <link rel="stylesheet" href="~/Theme/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="~/Theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="~/Theme/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    </head>
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+            <form asp-action="CreateTask">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h3>Creeaza un nou task</h3>
+                                </div>
+                            </div>
+                        </div><!-- /.container-fluid -->
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card card-lightblue">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Creare Task</h3>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label asp-for="TaskName" class="control-label">Titlu</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text text-secondary font-weight-bold">✓</span>
+                                                    </div>
+                                                    <input asp-for="TaskName" class="form-control" placeholder="Titlul task-ului" />
+                                                    <span asp-validation-for="TaskName" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Description" class="control-label">Descriere</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text text-secondary font-weight-bold">✓</span>
+                                                    </div>
+                                                    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Descrie task-ul"></textarea>
+                                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="StartDate" class="control-label">Data de inceput</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text text-secondary font-weight-bold">✓</span>
+                                                    </div>
+                                                    <input asp-for="StartDate" class="form-control" placeholder="Data de inceput" />
+                                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="EndDate" class="control-label">Data de sfarsit</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text text-secondary font-weight-bold">✓</span>
+                                                    </div>
+                                                    <input asp-for="EndDate" class="form-control" placeholder="Data de final" />
+                                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-12">
+                                    <a asp-action="Index" asp-controller="Projects" class="btn btn-secondary">Inapoi</a>
+                                    <input type="submit" value="Creeaza un nou task" class="btn btn-success float-right">
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+                    <aside class="control-sidebar control-sidebar-dark">
+                        <!-- Control sidebar content goes here -->
+                    </aside>
+    </form>
+        </div>
+
+        <!-- Bootstrap 4 -->
+        <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Select2 -->
+        <script src="~/Theme/plugins/select2/js/select2.full.min.js"></script>
+        <!-- jQuery -->
+        <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="~/Theme/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/Theme/dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="~/Theme/dist/js/demo.js"></script>
+    </body>
+    </html>
+

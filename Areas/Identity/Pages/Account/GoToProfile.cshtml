@@ -1,0 +1,80 @@
+﻿@page
+@model LicenseProject.Areas.Identity.Pages.Account.GoToProfileModel
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] - LicenseProject</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="align-content-lg-stretch">
+                <div class="card center">
+                    <div class="card-header">
+                        <h3 class="card-title lead">
+                            Salut @Model.Email !
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="height:750px">
+                        <dl>
+                            <dt>Solicitare ta pentru inscriere a fost aprobata.</dt>
+                            <dd>Pentru a putea finaliza procesul de inscriere este nevoie sa-ti completezi profilul cu datele necesare. </dd>
+                        </dl>
+                        <form method="post">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <button type="submit" asp-area="Identity" asp-page="/Account/GoToProfile" asp-route-email="@Model.Email"
+                                                class="btn btn-block btn-default  bg-gray-light ">
+                                            Creaza Profil
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Theme/dist/js/adminlte.min.js"></script>
+
+
+</body>
+</html>
+
+
+@*<style>
+    .navbar {
+        pointer-events: none !important
+    }
+</style>*@
+<script>
+    $(document).ready(function () {
+        debugger;
+        var sideBarMini = $('#sideBarMini');
+        if (!sideBarMini.hasClass('sidebar-collapse')) {
+            sideBarMini.addClass('sidebar-collapse');
+        }
+    });
+</script>

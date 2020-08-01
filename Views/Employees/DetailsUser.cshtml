@@ -1,0 +1,105 @@
+﻿@model IEnumerable<LicenseProject.ViewModels.UserProjectViewModel>
+@foreach (var item in Model)
+{
+    @: @{
+
+        var photoPath = "~/images/" + (item.MyUsers.PhotoPath ?? "noimage.jpg");
+    }
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    </head>
+
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h4>Detalii despre @item.FullName</h4>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+                <!-- Main content -->
+                <section class="content">
+
+                    <!-- Default box -->
+                    <div class="card card-solid">
+                        <div class="card-body pb-0">
+                            <div class="row d-flex align-items-stretch">
+                                <div class="col-12 col-sm-12 col-md-6 d-flex align-items-stretch">
+                                    <div class="card bg-light">
+                                        <div class="card-header text-muted border-bottom-0">
+                                            @item.Function
+                                        </div>
+                                        <div class="card-body pt-0">
+
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h1 class="lead"><b>@item.FullName</b></h1>
+
+                                                    <ul class="ml-4 mb-0 fa-ul text-muted text">
+
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-id-card"></i></span> ID : @item.Id</li>
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-user"></i></span> Username : @item.UserName</li>
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-calendar-alt"></i></span> Varsta : @item.Age</li>
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-venus-mars"></i></span> Gen : @item.Gender</li>
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-user-check"></i></span> Rol : @item.Role</li>
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-book"></i></span> Proiect : @item.ProjectName</li>
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Adresa : @item.Address</li>
+                                                        <li class="os-text-inherit"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefon : @item.PhoneNumber</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-5 text-center">
+                                                    <img src="@photoPath" asp-append-version="true" alt="" class=" img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="text-right">
+                                                <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                                                    <i class="  fas fa-user-edit"></i> Editare
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+        </div>
+        <!-- ./wrapper -->
+        <!-- jQuery -->
+        <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/Theme/dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="~/Theme/dist/js/demo.js"></script>
+    </body>
+</html>
+        }

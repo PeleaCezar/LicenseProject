@@ -1,0 +1,288 @@
+﻿@model LicenseProject.ViewModels.ProjectBudgetViewModel
+
+
+<header>
+
+    <!-- AdminLTE App -->
+    <script src="~/Theme/dist/js/adminlte.min.js"></script>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/Theme/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="~/Theme/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($(".select2").length > 0) {
+                $('.select2').select2();
+            };
+        });
+    </script>
+
+
+
+    <!-- DatePicker-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+
+
+    @*<script>
+            function onClick() {
+                var minDate = new Date();
+                minDate = minDate;
+                debugger;
+                onclose: function dac (selectedDate) {
+                    $('#date_input').datepicker("option", "minDate", selectedDate);
+                    debugger;
+                }
+            }
+        </script>*@
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+</header>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h3>Creeaza proiect</h3>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Informatii Proiect</h3>
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label asp-for="Title" class="control-label">Nume</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                            </div>
+                                            <input asp-for="Title" class="form-control" placeholder="Numele proiectului" />
+                                        </div>
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Description" class="control-label">Descriere</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                            </div>
+                                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Descrie proiectul"></textarea>
+                                        </div>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="TeamMembers" class="control-label">Membri</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                            </div>
+                                            <select class="select2" asp-for="TeamMembers" asp-items="@(new SelectList(ViewBag.TeamMembers))" data-placeholder="Aloca angajati" multiple="multiple" style="width: 92%;">
+                                            </select>
+                                            <span asp-validation-for="TeamMembers" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="bootstrap-iso">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="CreatedAt" class="control-label" for="CreatedAt">Data</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                            <input asp-for="CreatedAt" class="form-control" id="CreatedAt" autocomplete="off" name="CreatedAt" placeholder="DD/MM/YYYY" type="text" />
+                                                        </div>
+                                                    </div>
+                                                    <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-secondary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Resurse alocate</h3>
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="Faculty">Facultate</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                    </div>
+                                                    <select class="form-control" asp-for="Faculty">
+                                                        <option selected disabled>Selecteaza facultatea</option>
+                                                        <option>Agronomie</option>
+                                                        <option>Automatica, Calculatoare si Electronica</option>
+                                                        <option>Drept</option>
+                                                        <option>Drept - Drobeta Turnu-Severin</option>
+                                                        <option>Economie si Administrarea Afacerilor</option>
+                                                        <option>Economie si Administrarea Afacerilor - Drobeta Tr. Severin</option>
+                                                        <option>Educatie Fizica si Sport</option>
+                                                        <option>Educatie Fizica si Sport - Drobeta Turnu Severin</option>
+                                                        <option>Mecanica - Ingineria si Managementul Sistemelor Tehnologice - Drobeta - Turnu Severin</option>
+                                                        <option>Inginerie Electrica</option>
+                                                        <option>Litere</option>
+                                                        <option>Litere - Drobeta Turnu Severin</option>
+                                                        <option>Matematica si Informatica</option>
+                                                        <option>Mecanica</option>
+                                                        <option>Teologie Ortodoxa</option>
+                                                        <option>Stiinte Sociale</option>
+                                                    </select>
+
+                                                </div>
+                                                <span asp-validation-for="Faculty" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label asp-for="ProjectDuration">Durata in zile</label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                </div>
+                                                <input asp-for="ProjectDuration" class="form-control" placeholder="Durata proiectului" />
+                                            </div>
+                                            <span asp-validation-for="ProjectDuration" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label asp-for="EstimatedBudget">Buget alocat</label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                </div>
+
+                                                <input asp-for="EstimatedBudget" class="form-control" placeholder="Suma alocata proiectului" />
+                                            </div>
+                                            <span asp-validation-for="EstimatedBudget" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label asp-for="Currency">Tipul monedei </label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                    </div>
+                                                    <input class="form-control" asp-for="Currency" value="RON" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label asp-for="AmountSpent">Cheltuieli</label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                </div>
+                                                <input asp-for="AmountSpent" class="form-control" placeholder="Cheltuieli ale proiectului" />
+                                            </div>
+                                            <span asp-validation-for="AmountSpent" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label asp-for="ProjectDirector">Director proiect</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                    </div>
+                                                    <select asp-for="ProjectDirector" class="form-control" placeholder="Director de proiect" asp-items="@(new SelectList(ViewBag.ProjectDirector))">
+                                                        <option selected disabled> Selecteaza director</option>
+                                                    </select>
+                                                </div>
+                                                <span asp-validation-for="ProjectDirector" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <a asp-action="Index" class="btn btn-secondary">Inapoi</a>
+                            <input type="submit" value="Creeaza un nou proiect" class="btn btn-success float-right">
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            @*@await Component.InvokeAsync("NToastNotify")*@
+        </form>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        var date_input = $('#CreatedAt'); //our date input has the name "date"
+        var date = new Date();
+        date.setDate(date.getDate());
+        date_input.datepicker({
+            startDate: date,
+            todayHighlight: true,
+            autoclose: true,
+           format: 'dd/mm/yyyy',
+        });
+
+    })
+</script>
+<style>
+    .select2-selection__choice {
+        background-color: #007bff !important;
+    }
+</style>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

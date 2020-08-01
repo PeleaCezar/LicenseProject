@@ -1,0 +1,279 @@
+﻿@model LicenseProject.ViewModels.ProjectBudgetViewModel
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Detalii proiect</h1>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- Main content -->
+            <section class="content">
+
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"> Informatii despre proiect si resursele alocate</h3>
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                                <div class="row">
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted"><i class="fas fa-book mr-1"></i>Nume </span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.Title</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted"><i class="fas fa-check-square mr-1"></i>Status </span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.Status</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted"><i class="fas fa-calendar-alt mr-1"></i>Data crearii</span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.DateCreate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-1">
+                                <div class="info-box bg-light">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-center text-muted"><i class="fas fa-comment-alt mr-1"></i> Descriere </span>
+                                        <span class="info-box-number text-center text-muted mb-0">@Model.Description</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                                <div class="row">
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Buget alocat</span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.EstimatedBudget</span>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        @Model.Currency
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Cheltuieli</span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.AmountSpent</span>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        @Model.Currency
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Durata proiectului(in zile)</span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.ProjectDuration</span>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fas fa-calendar-week"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                                <div class="text-muted">
+                                    <p class="text-sm bg-light">
+                                        <i class="fas fa-university"></i>
+                                        Facultate
+                                        <b class="d-block">@Model.Faculty</b>
+                                    </p>
+                                    <p class="text-sm bg-light">
+                                        <i class="fas fa-user-tie"></i>
+                                        Director proiect
+                                        <b class="d-block">@Model.ProjectDirector</b>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                            <div class="row">
+                                @if (Model.ExternalFinance != "0")
+                                {
+
+
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Finantare externa</span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.ExternalFinance</span>
+
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            @Model.Currency
+                                                        </span>
+                                                    </div>
+                                                    <div class="input-group-append ml-auto">
+                                                        <a data-toggle="tooltip" data-placement="top" title="@ViewBag.GrantApplications">
+                                                            <i class="fas fa-info-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                }
+                                @if (Model.NoOfHours != "0")
+                                {
+                                    <div class="col-12 col-sm-4">
+                                        <div class="info-box bg-light">
+                                            <div class="info-box-content">
+                                                <span class="info-box-text text-center text-muted">Numar de ore pe proiect</span>
+                                                <span class="info-box-number text-center text-muted mb-0">@Model.NoOfHours</span>
+
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-business-time"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        @if (Model.Employees.Count > 0)
+                        {
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Angajatii alocati proiectului</h3>
+
+                                            <div class="card-tools">
+                                                <div class="input-group input-group-sm" style="width: 150px;">
+                                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-hover text-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nume</th>
+                                                        <th>Nume de utlizator</th>
+                                                        <th>Numar de telefon</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.Employees)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Name</td>
+                                                            <td>@item.Username</td>
+                                                            <td>@item.PhoneNumber</td>
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        }
+</section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Theme/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Theme/dist/js/demo.js"></script>
+</body>
+</html>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            delay: { show: 300, hide: 500 },
+            html: true,
+        });
+      
+    })
+</script>
+<style>
+    .tooltip {
+        white-space:pre-line
+    }
+</style>

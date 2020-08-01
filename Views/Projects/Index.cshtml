@@ -1,0 +1,367 @@
+﻿@model IEnumerable<LicenseProject.ViewModels.ProjectViewModel>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<MyUser> signInManager;
+
+<header>
+    <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Theme/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="~/Theme/plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- jQuery -->
+    
+</header>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="content-wrapper">
+
+            @if (Model.Count() > 0)
+            {
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Proiecte</h1>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="card">
+
+                        <div class="card-body p-0">
+                            <table class="table table-striped projects table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%" class="text-center">
+                                            Proiect
+                                        </th>
+                                        <th style="width: 8%" class="text-center">
+                                            Numar membri
+                                        </th>
+                                        <th style="width: 25%" class="text-center">
+                                            Descriere
+                                        </th>
+                                        <th style="width: 7%" class="text-center">
+                                            Status
+                                        </th>
+                                        <th style="width: 24%" class="text-center">
+                                            Actiuni
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr class="btnDelete" data-id="@item.ID">
+                                            <td>
+                                                <a>
+                                                    @item.Title
+                                                </a>
+                                                <br />
+                                                <small>
+                                                    @item.CreateDate
+                                                </small>
+                                            </td>
+                                            <td>
+                                                <ul class="list-inline text-center">
+                                                    @item.NoOfMembers
+                                                </ul>
+                                            </td>
+
+                                            <td>
+
+                                                @item.Description
+
+                                            </td>
+                                            @if (item.Status == "In desfasurare")
+                                            {
+                                                <td class="project-state">
+                                                    <span class="badge badge-success">@item.Status</span>
+                                                </td>
+                                            }
+                                            @if (item.Status == "Terminat")
+                                            {
+                                                <td class="project-state">
+                                                    <span class="badge badge-primary">@item.Status</span>
+                                                </td>
+                                            }
+
+                                            @if (item.Status == "Respins")
+                                            {
+                                                <td class="project-state">
+                                                    <span class="badge badge-danger">@item.Status</span>
+                                                </td>
+                                            }
+                                            @if (item.Status == null)
+                                            {
+                                                <td class="project-state">
+                                                    <span class="badge badge-danger">NO STATUS</span>
+                                                </td>
+                                            }
+
+
+                                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                                            {
+
+
+                                        <td class="project-actions text-right">
+
+                                            <a class=" btn btn-primary btn-sm" method="get" asp-route-id="@item.ID" asp-controller="Tasks" asp-action="ViewBacklog">
+                                                <i class="fas fa-tasks"></i>
+                                                Sarcini
+                                            </a>
+                                            <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.ID">
+                                                <i class="fas fa-folder">
+                                                </i>
+                                                Detalii
+                                            </a>
+                                            <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.ID">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Editare
+                                            </a>
+
+                                            <a class="btn btn-danger btn-sm btnDelete" href="#">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Stergere
+                                            </a>
+
+
+                                        </td>
+                                            }
+                                            else if (signInManager.IsSignedIn(User) && User.IsInRole("Finantator"))
+                                            {
+                                        <td>
+                                            <a class="  ml-2  btn-secondary btn-sm mr-3" style="height:25px" asp-controller="Projects" asp-action="Details" asp-route-id="@item.ID">
+                                                <i class="fas fa-folder">
+                                                </i>
+                                                Detalii proiect
+                                            </a>
+                                            <a class="   btn-success btn-sm" method="get" asp-controller="GrantApplication" asp-action="AddGrantApplication" asp-route-id="@item.ID">
+                                                <i class="fas fa-money-check"></i>
+                                                Finanteaza proiectul
+                                            </a>
+
+                                        </td>
+                                            }
+                                            else if(signInManager.IsSignedIn(User) && User.IsInRole("Angajat"))
+                                             {
+                                        <td class="text-center">
+                                            <a class="btn-secondary btn-sm mr-2" method="get" asp-route-id="@item.ID" asp-controller="Projects" asp-action="Details">
+                                                <i class="fas fa-folder">
+                                                </i>
+                                                Detalii proiect
+                                            </a>
+                                            <a class=" btn-primary btn-sm" method="get" asp-route-id="@item.ID" asp-controller="Tasks" asp-action="ViewBacklog">
+                                                <i class="fas fa-tasks"></i>
+                                                Vizualizeaza sarcini de lucru
+                                            </a>
+                                        </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                            <div class="modal fade" id="myModal" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <label class="modal-title" id="ProjectDeleteModalLabel"></label>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-left">
+                                            <p>Esti sigur ca doresti sa stergi acest proiect?</p>
+                                        </div>
+                                        <form asp-action="Delete">
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Inapoi</button>
+                                                <button type="submit" class="btn btn-danger" id="btnDelteYes">Stergere</button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                        </div>
+                    </div>
+                </section>
+            }
+            else
+            {
+                <div>
+                    <div class="align-content-lg-stretch">
+                        <div class="card-header">
+                            <h1 class="card-title lead">
+                                Proiecte
+                            </h1>
+                        </div>
+                        <div class="card-body" style="height:750px">
+
+                            <h6>
+                                Pana in acest moment nu s-au creat proiecte.
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+
+    </div>
+
+    <!-- Bootstrap 4 -->
+    <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Theme/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Theme/dist/js/demo.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="~/Theme/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="~/Theme/plugins/toastr/toastr.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+
+
+<script>
+    function pushMenuClick(value) {
+        var sideBarMini = $('#sideBarMini');
+        if ($('#sideBarMini').hasClass('sidebar-collapse')) {
+            $('#sideBarMini').removeClass('sidebar-collapse');
+        }
+        else {
+            sideBarMini.addClass("sidebar-collapse");
+        }
+    }
+</script>
+
+
+
+
+<script>
+
+    $('a.btnDelete').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).closest('tr').data('id');
+        $('#myModal').data('id', id).modal('show');
+         var response = undefined;
+            $.ajax({
+                type: 'GET',
+                url: `/Projects/GiveNameProject?id=${id}`,
+                async: false,
+                cache: false,
+                timeout: 5000,
+                error: function () {
+                    return true;
+                },
+                success: function (data) {
+                    response = data.data;
+                }
+            });
+                    if (response !== undefined) {
+                var titleHeader = $('#ProjectDeleteModalLabel').empty().append(response.title);
+            }
+    
+    });
+    $('#btnDelteYes').click(function () {
+        var id = $('#myModal').data('id');
+        var myUrl = `/Projects/Delete?id=${id}`;
+        var data = undefined;
+        $('#myModal').modal('hide');
+        $('[data-id=' + id + ']').remove();
+        var response = deleteProject(myUrl);
+        if (response.success) {
+
+            toastr.success(data.message);
+
+        }
+        else {
+            toastr.error("Error while Deleting");
+        }
+
+
+    });
+
+    function deleteProject(url) {
+        var dataResponse;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            async: false,
+            cache: false,
+            timeout: 5000,
+            success: function (data) {
+                dataResponse = data;
+            }
+        });
+        return dataResponse;
+    }
+    //$("a.removeLink").on("click", function () {
+    //    debugger;
+    //    var tr = $(this).closest('tr');
+    //    tr.remove();
+    //});
+</script>
+
+
+<style>
+    .btn-secondary {
+    color: #fff;
+    background-color: #888d90;
+    border-color: #888d90;
+    box-shadow: none;
+}
+    .modal-title {
+    color: #6c757d;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

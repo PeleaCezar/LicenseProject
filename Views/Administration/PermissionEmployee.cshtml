@@ -1,0 +1,353 @@
+﻿@model IEnumerable<LicenseProject.ViewModels.UserProjectViewModel>
+@using Microsoft.AspNetCore.Identity
+@inject RoleManager<IdentityRole> RoleManage
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Theme/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="~/Theme/plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="content-wrapper">
+            @if (Model.Count() > 0)
+            {
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Cereri de inregistrare</h1>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <section class="content">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover table-bordered text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 20%">
+                                            Nume
+                                        </th>
+                                        <th style="width: 20%">
+                                            Username
+                                        </th>
+                                        <th style="width: 20%">
+                                            Rol cerut
+                                        </th>
+                                        <th style="width: 25%">
+                                            Data inregistrarii
+                                        </th>
+                                        <th style="width: 25%">
+                                            Actiuni
+                                        </th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model)
+                                    {
+
+                                        <tr class="btnAproba" data-id="@user.Id">
+                                            @*class="" data-id="@user.Id" data-role="@user.Role"*@
+
+                                            <td>
+                                                <a>
+                                                    @user.FullName
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    @user.UserName
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    @user.Role
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    @user.CreateDate
+                                                </a>
+                                            </td>
+
+
+
+                                            <td class="project-actions text-right">
+
+                                                <a class="btn btn-success btn-sm btnAproba" href="#">
+                                                    @*onclick="Open('${@user.UserName}')">*@
+                                                    Aprobare
+                                                </a>
+
+
+                                                <a class="btn btn-danger btn-sm" method="get" asp-action="Refused" asp-route-email="@user.Email">
+
+                                                    Refuzare
+                                                </a>
+                                            </td>
+
+
+                                        </tr>
+                                        <!-- Modal -->
+
+                                    }
+                                </tbody>
+
+                            </table>
+                            @*  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            @*<partial name="ConfirmRoleModal" />
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <!-- Modal for Employee-->
+                    <div class="modal fade" id="modalEmployee" tabindex="-1" role="dialog" aria-labelledby="modalHoursTitle" aria-hidden="true">
+
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <label class="modal-title" id="nameEmployee"></label>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div id="reservedRole" class="">
+                                    <div class="modal-body">
+                                        <label for="rolActual" style="text-align:center">Rol cerut</label>
+                                        <input class="form-control col-lg-6" readonly id="rolActual" style="text-align:center">
+                                        <div class="text">
+                                            Esti de acord cu rolul cerut ?
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+
+                                        <button type="button" class="btn btn-light text-left" data-dismiss="modal">Inapoi</button>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-warning" id="not-button" onclick="onClickNo()">Nu</button>
+                                            <button type="button" class="btn btn-primary" id="yes-button" data-dismiss="modal">Da</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="nameofActualRole" class="hidden">
+                                    <div class="modal-body">
+                                        <label for="nameActualRole" style="text-align:center">Selectati un rol:</label>
+                                        <select class="form-control col-lg-6" id="nameActualRole"  style="text-align:center">
+                                            <option hidden>Roluri</option>
+                                            <option>Administrator</option>
+                                            <option>Angajat</option>
+                                            <option>Finantator</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-light text-left" onclick="onClickBack()">Inapoi</button>
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-primary btnSave" id="save-button" data-dismiss="modal">Salveaza</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+            else
+            {
+                <div>
+                    <div class="align-content-lg-stretch">
+                        <div class="card-header">
+                            <h1 class="card-title lead">
+                                Cereri de inregistrare
+                            </h1>
+                        </div>
+                        <div class="card-body" style="height:750px">
+
+                            <h6>
+                                Nu ati primit cereri noi de inregistrare.
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+    <script>
+
+        $('a.btnAproba').on('click', function (e) {
+            var id = $(this).closest('tr').data('id');
+            $('#modalEmployee').data('id', id).modal('show');
+            var response = undefined;
+            $.ajax({
+                type: 'GET',
+                url: `/Administration/GiveRoleEmployee?id=${id}`,
+                async: false,
+                cache: false,
+                timeout: 5000,
+                error: function () {
+                    return true;
+                },
+                success: function (data) {
+                    response = data.data;
+                }
+            });
+            if (response !== undefined) {
+                var titleHeader = $('#nameEmployee').empty().append(response.fullName);
+                var role = $("#rolActual").val(response.role);
+                var email = (response.email);
+            }
+            $("#yes-button").on("click", function () {     
+                var id = $('#modalEmployee').data('id');
+                $.ajax({
+                          type: 'POST',
+                          data: { email },
+                          url: '/Administration/Accept',
+                          dataType: "text",
+                          success: function (data) {
+                          window.location.reload();
+
+                          }
+                });
+            });
+             $("#save-button").on("click", function () {     
+                 var id = $('#modalEmployee').data('id');
+                 var role = $("#nameActualRole").val();
+                 var email = (response.email);
+                $.ajax({
+                          type: 'POST',
+                          data: { email,role },
+                          url: '/Administration/Accept',
+                          dataType: "text",
+                          success: function (data) {
+                          window.location.reload();
+
+                          }
+                });
+                 
+            });
+
+        });
+
+        function onClickNo() {
+            var moreRoleInput = document.getElementById('nameofActualRole');
+            moreRoleInput = moreRoleInput.classList.remove('hidden');
+            var initialDialog = document.getElementById('reservedRole');
+            initialDialog = initialDialog.classList.add('hidden');
+        }
+             function onClickBack() {
+        var moreRoleInput = document.getElementById('nameofActualRole');
+        moreRoleInput = moreRoleInput.classList.add('hidden');
+        var initialDialog = document.getElementById('reservedRole');
+        initialDialog = initialDialog.classList.remove('hidden');
+    }
+    </script>
+
+    <!-- jQuery -->
+    <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Theme/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Theme/dist/js/demo.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="~/Theme/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="~/Theme/plugins/toastr/toastr.min.js"></script>
+
+
+
+</body>
+</html>
+<style>
+    .hidden {
+        display: none;
+    }
+    .text{
+        margin-top:10px;
+    }
+    .form-control:disabled, .form-control[readonly] {
+    background-color: #e9ecef00;
+    opacity: 1;
+}
+    </style>
+
+
+@*
+    <script>
+        function pushMenuClick(value) {
+            var sideBarMini = $('#sideBarMini');
+            if ($('#sideBarMini').hasClass('sidebar-collapse')) {
+                $('#sideBarMini').removeClass('sidebar-collapse');
+            }
+            else {
+                sideBarMini.addClass("sidebar-collapse");
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+        function Open(value) {
+            debugger;
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("ConfirmRole", "Administration")',
+                data: { user: user },
+                success: function (data) {
+                    $('#Preview').html(data);
+                    $('#myModal').modal('show');
+                }
+            })
+        }
+    </script>
+
+    <script>
+        $('a.btnAccept').on('click', function (e) {
+            debugger;
+            e.preventDefault();
+            var id = $(this).closest('tr').data('id');
+            $('#myModal').data('id', id).modal('show');
+            debugger;
+        });
+        $('#btnSaveChanges').click(function () {
+            debugger;
+            var id = $('#myModal').data('id');
+            var role = $(this).closest('tr').data('role');
+            var role = $('myModal').data('role');
+            var myUrl = `/Administration/Accept?id=${id}`;
+            console.info(myUrl);
+            debugger;
+             var data = undefined;
+            $('#myModal').modal('hide');
+            $('[data-id=' + id + ']').add();
+        })
+
+    </script>
+    *@

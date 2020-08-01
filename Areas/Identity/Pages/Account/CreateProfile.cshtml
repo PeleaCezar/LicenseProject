@@ -1,0 +1,187 @@
+﻿@page
+@model LicenseProject.Areas.Identity.Pages.Account.CreateProfileModel
+
+    <header>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="~/Theme/plugins/fontawesome-free/css/all.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="~/Theme/dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+        <!-- Bootstrap 4 -->
+        <script src="~/Theme/plugins/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+        <!-- AdminLTE App -->
+        <script src="~/Theme/dist/js/adminlte.min.js" defer></script>
+
+        <!-- jQuery -->
+        <script src="~/Theme/plugins/jquery/jquery.min.js"></script>
+        <!-- InputMask -->
+        <script src="~/Theme/plugins/moment/moment.min.js" defer></script>
+        <script src="~/Theme/plugins/inputmask/min/jquery.inputmask.bundle.min.js" defer></script>
+
+        <script>
+            $(function () {
+                $('[data-mask]').inputmask()
+            });
+        </script>
+
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        </environment>
+    </header>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <form enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Creaza-ti profilul</h1>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-secondary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Informatii personale</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Input.FullName" class="control-label">Nume</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+                                                </div>
+                                                <input asp-for="Input.FullName" class="form-control" placeholder="Nume complet" />
+                                            </div>
+                                            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label asp-for="Input.Age" class="control-label">Varsta</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                                    </div>
+                                                    <input type="number" asp-for="Input.Age" min="20" max="100" class="form-control" placeholder="Varsta" />
+                                                </div>
+                                                <span asp-validation-for="Input.Age" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Input.Function" class="control-label">Functie</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-chalkboard-teacher"></i></span>
+                                                </div>
+                                                <input asp-for="Input.Function" class="form-control" placeholder="Functie" />
+                                            </div>
+                                            <span asp-validation-for="Input.Function" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label asp-for="Input.Address" class="control-label">Adresa</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-home"></i></span>
+                                                    </div>
+                                                    <input asp-for="Input.Address" class="form-control" placeholder="Adresa" />
+                                                </div>
+                                                <span asp-validation-for="Input.Address" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Input.Gender" class="control-label">Gen</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-venus-mars"></i></span>
+                                                </div>
+                                                <select class="form-control" asp-for="Input.Gender">
+                                                    <option selected disabled>Selecteaza genul</option>
+                                                    <option>Masculin</option>
+                                                    <option>Feminin</option>
+                                                </select>
+                                            </div>
+                                            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label asp-for="Input.PhoneNumber" class="control-label">Telefon</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                    </div>
+                                                    <input type="text" asp-for="Input.PhoneNumber" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask placeholder="Numar de telefon" />
+                                                </div>
+                                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        @*<input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>*@
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Input.model.Photo" class="control-label">Poza</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-image"></i></span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input asp-for="Input.model.Photo" class="form-control custom-file-input" />
+                                                    <label class="custom-file-label">Alege o fotografie...</label>
+                                                </div>
+                                            </div>
+                                            <span asp-validation-for="Input.model.Photo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <a asp-action="Index" class="btn btn-secondary">Renunta</a>
+                            <input type="submit" value="Salveaza date" class="btn btn-success float-right">
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            @*This script is required to display the selected file in the file upload element*@
+
+            @section Scripts {
+                <script>
+                    $(document).ready(function () {
+                        $('.custom-file-input').on("change", function () {
+                            var fileName = $(this).val().split("\\").pop();
+                            $(this).next('.custom-file-label').html(fileName);
+                        });
+                    });
+                </script>
+            }
+        </form>
+    </div>
+
+</body>
+
